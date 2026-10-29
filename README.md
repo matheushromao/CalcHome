@@ -24,7 +24,7 @@ Acesse <http://localhost:3000>. Na inicialização, o contêiner aplica a migra�
 ```bash
 npm install
 cp .env.example .env
-docker compose up -d db      # apenas o PostgreSQL
+docker compose up -d db      # apenas o PostgreSQL (porta 5433 no host; mude com DB_PORT)
 npx prisma migrate deploy
 npm run db:seed
 npm run dev
