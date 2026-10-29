@@ -13,7 +13,7 @@ export function calculateItem(item: Item, settings: Settings): ItemResult {
   const issues: Issue[] = [];
 
   for (const key of required) {
-    const issue = checkRequired(key, item.params[key]);
+    const issue = checkRequired(key, item.params[key], key === "duration" ? item.durationUnit : undefined);
     if (issue) issues.push(issue);
   }
   for (const key of optionalKeys(item)) {

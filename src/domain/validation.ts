@@ -16,8 +16,8 @@ export function validateValue(key: ParamKey, value: number | null): string | nul
  * Verifica um campo indispensável. Ausente ou com zero que bloqueia o cálculo
  * geram um aviso explicando o que falta e por quê.
  */
-export function checkRequired(key: ParamKey, field: Field | undefined): Issue | null {
-  const meta = PARAM_META[key];
+export function checkRequired(key: ParamKey, field: Field | undefined, unit?: string): Issue | null {
+  const meta = { ...PARAM_META[key], ...(unit ? { unit } : {}) };
   const value = field?.value ?? null;
   if (value === null) return { field: key, message: `Falta ${meta.label.toLowerCase()} (${meta.unit}). ${meta.why}` };
   const invalid = validateValue(key, value);
