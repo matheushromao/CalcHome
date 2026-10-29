@@ -1,0 +1,29 @@
+// O banco guarda apenas os catálogos de referência. Nenhum dado doméstico do usuário é armazenado.
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CatalogDomain {
+  energy
+  water
+}
+
+model CatalogEntry {
+  id        String        @id
+  domain    CatalogDomain
+  name      String
+  icon      String
+  category  String
+  sortOrder Int
+  /// Método, frequência, escopo e valores de referência (formato de CatalogEntry em src/domain/items.ts)
+  data      Json
+  updatedAt DateTime      @updatedAt
+
+  @@index([domain, sortOrder])
+}
